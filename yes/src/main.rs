@@ -1,3 +1,5 @@
 fn main() {
-    println!("yes");
+    loop {
+        println!("y");
+    }
 }
