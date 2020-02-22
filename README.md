@@ -15,3 +15,17 @@ A thread-safe, memory-safe guaranteed ```yes``` would benefit everyone.
 ## No, but why?
 
 I want to learn rust. 
+
+## So this will be exactly like Coreutils?
+As close as possible. Some options might not be implmented.
+
+## Status
+
+#### Completed
+* yes
+
+#### In-Progress
+* 
+
+#### Todo
+* All the ones not complete or in-progress
