@@ -2,7 +2,7 @@ use std::env;
 use std::fs;
 use std::io::{self, BufRead};
 
-/* -n sounts lines
+/* -n counts lines
  * -b counts lines and skips blanks
  * -s makes the files single spaced
  *
@@ -13,11 +13,63 @@ use std::io::{self, BufRead};
  * cat file1 -n file2
  *
  * going to ignore -v, -u, -t, -e for now
+ * 
+ * I should have known this, but if you don't append a file
+ * anythign you type will get echoed back to you because cat
+ * is a madman
  */
+
+#[derive(Debug)]
+struct Arguments {
+    count: bool,
+    count_non_blank: bool,
+    single_spaced: bool,
+    files: Vec<String>
+}
+
+fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
+    let mut all_files = false;
+    let mut pargs = Arguments {
+       count: false,
+       count_non_blank: false,
+       single_spaced: true,
+       files: vec!()
+    };
+    
+    for (idx, arg) in args.iter().skip(1).enumerate() {
+        if arg.starts_with("-") {
+            match arg.as_str() {
+                "-n" => pargs.count = true,
+                "-b" => pargs.count_non_blank = true,
+                "-s" => pargs.single_spaced = true,
+                _    => { 
+                    println!("Illegal option: {}", arg); 
+                    return None
+                }
+            };
+        } else {
+            pargs.files = args[(idx + 1)..].to_vec();
+            break;
+        }
+    }
+
+    Some(pargs)
+}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    
+    let pargs = match parse_aruments(args) {
+        Some(args) => args,
+        None => {
+            println!("Listen up partner - soemthing bad happened.");
+            return
+        }
+    };
+
+    println!("Args: {:?}", pargs);
+
+    return    
+    /*
     let file = match args.get(1) {
         Some(arg) => arg,
         _ => {
@@ -54,5 +106,6 @@ fn main() {
             println!("{}", l);
         }
     }
+    */
 }
 
