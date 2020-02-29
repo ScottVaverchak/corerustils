@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use std::io::{self, BufRead};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -13,25 +14,32 @@ fn main() {
     };
 
     let file_metadata = match fs::metadata(file) {
-      Ok(f)    => f,
-      Err(err) => {
-        println!("{}: {}", file, err);
-        return
-      }
+        Ok(f)    => f,
+        Err(err) => {
+            println!("{}: {}", file, err);
+            return
+        }
     };
 
-    if(file_metadata.is_dir()) {
-      println!("{} is a directory", file);
-      return
+    if file_metadata.is_dir() {
+        println!("{} is a directory", file);
+        return 
     }
 
-    let contents = match fs::read_to_string(file) {
-      Ok(c)    => c,
-      Err(err) => {
-        println!("Seems like we got an error");
-        return
-      }
+    let file_lines = match fs::File::open(file) {
+        Ok(c) => c,
+        Err(err) => {
+          println!("Error reading {}: {}", file, err);
+          return
+        }
     };
 
-    println!("{}", contents);
+    let lines = io::BufReader::new(file_lines).lines();
+
+    for line in lines {
+        if let Ok(l) = line {
+            println!("{}", l);
+        }
+    }
 }
+
