@@ -2,6 +2,19 @@ use std::env;
 use std::fs;
 use std::io::{self, BufRead};
 
+/* -n sounts lines
+ * -b counts lines and skips blanks
+ * -s makes the files single spaced
+ *
+ * Multiple files will be printed:
+ * cat file1 file2 file3 
+ *
+ * Will say -n is now a file (its not, ya big goof), but print the rest
+ * cat file1 -n file2
+ *
+ * going to ignore -v, -u, -t, -e for now
+ */
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     
