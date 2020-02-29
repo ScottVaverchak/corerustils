@@ -33,7 +33,7 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
        count: false,
        count_non_blank: false,
        single_spaced: true,
-       files: vec!()
+       files: vec![]
     };
     
     for (idx, arg) in args.iter().skip(1).enumerate() {
