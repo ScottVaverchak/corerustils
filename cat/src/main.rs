@@ -27,6 +27,7 @@ struct Arguments {
     files: Vec<String>
 }
 
+
 fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
     let mut all_files = false;
     let mut pargs = Arguments {
@@ -55,6 +56,8 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
 
     Some(pargs)
 }
+
+
 fn print_file_contents(file: &String) {
     
     let file_metadata = match fs::metadata(file) {
@@ -101,6 +104,7 @@ fn main() {
     for file in pargs.files {
         print_file_contents(&file);
     }
+    
     return    
 }
 
