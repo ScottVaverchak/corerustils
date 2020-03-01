@@ -57,7 +57,7 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
 }
 
 
-fn print_file_contents(file: &String, count: &bool) {
+fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool) {
     
     let file_metadata = match fs::metadata(file) {
         Ok(f)    => f,
@@ -85,8 +85,11 @@ fn print_file_contents(file: &String, count: &bool) {
     let mut current_count = 1;
     for line in lines {
         if let Ok(l) = line {
-            if *count {
-                println!("{}\t {}", current_count, l);
+            if *ignore_blank && l.is_empty() == false {
+               println!("{}\t {}", current_count, l);
+               current_count += 1;
+            } else if *count {
+               println!("{}\t {}", current_count, l);
                current_count += 1;   
             } else {
                 println!("{}", l);
@@ -106,7 +109,7 @@ fn main() {
     };
 
     for file in pargs.files {
-        print_file_contents(&file, &pargs.count);
+        print_file_contents(&file, &pargs.count, &pargs.count_non_blank);
     }
     
     return    
