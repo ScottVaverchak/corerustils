@@ -37,20 +37,20 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
     };
     
     for (idx, arg) in args.iter().skip(1).enumerate() {
-        if arg.starts_with("-") {
-            match arg.as_str() {
-                "-n" => pargs.count = true,
-                "-b" => pargs.count_non_blank = true,
-                "-s" => pargs.single_spaced = true,
-                _    => { 
-                    println!("Illegal option: {}", arg); 
-                    return None
-                }
-            };
-        } else {
+        if !arg.starts_with("-") {
             pargs.files = args[(idx + 1)..].to_vec();
             break;
         }
+
+        match arg.as_str() {
+            "-n" => pargs.count = true,
+            "-b" => pargs.count_non_blank = true,
+            "-s" => pargs.single_spaced = true,
+            _    => { 
+                println!("Illegal option: {}", arg); 
+                return None
+           }
+        };
     }
 
     Some(pargs)
