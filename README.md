@@ -25,11 +25,11 @@ Anything not listed below hasn't been worked on yet.
 
 ```cat``` will print out multiple files and error out when it the given file is a directory or does not exist. The following switches will be implemented:
 
-| switch | description                                                                   |
-|--------|-------------------------------------------------------------------------------|
-| -b     | Number the non-blank output lines, starting at 1.                             |
-| -n     | Number the output lines, starting at 1.                                       |
-| -s     | Squeeze multiple adjacent empty lines, causing the output to be single spaced |
+| Switch | Description                                                                   | Implemented? |
+|--------|-------------------------------------------------------------------------------|--------------|
+| -b     | Number the non-blank output lines, starting at 1.                             | Yes          |
+| -n     | Number the output lines, starting at 1.                                       | Yes          |
+| -s     | Squeeze multiple adjacent empty lines, causing the output to be single spaced | No           |
 
 All other switches will not be implemented initially (or ever).
 
