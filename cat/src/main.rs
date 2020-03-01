@@ -2,16 +2,7 @@ use std::env;
 use std::fs;
 use std::io::{self, BufRead};
 
-/* -n counts lines
- * -b counts lines and skips blanks
- * -s makes the files single spaced
- *
- * Multiple files will be printed:
- * cat file1 file2 file3 
- *
- * Will say -n is now a file (its not, ya big goof), but print the rest
- * cat file1 -n file2
- *
+/*
  * going to ignore -v, -u, -t, -e for now
  * 
  * I should have known this, but if you don't append a file
@@ -28,7 +19,7 @@ struct Arguments {
 }
 
 
-fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
+fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
     let mut pargs = Arguments {
        count: false,
        count_non_blank: false,
@@ -47,13 +38,12 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
             "-b" => pargs.count_non_blank = true,
             "-s" => pargs.single_spaced = true,
             _    => { 
-                println!("Illegal option: {}", arg); 
-                return None
+                return Err(format!("Illegal option: {}", arg));
            }
         };
     }
 
-    Some(pargs)
+    Ok(pargs)
 }
 
 
@@ -101,9 +91,10 @@ fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool) {
 fn main() {
     let args: Vec<String> = env::args().collect();
     let pargs = match parse_aruments(args) {
-        Some(args) => args,
-        None => {
-            println!("Listen up partner - soemthing bad happened.");
+        Ok(args)   => args,
+        Err(err) => {
+            println!("{}", err);
+            println!("Usage will go here.com");
             return
         }
     };
