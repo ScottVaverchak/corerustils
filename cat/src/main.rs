@@ -55,29 +55,8 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
 
     Some(pargs)
 }
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let pargs = match parse_aruments(args) {
-        Some(args) => args,
-        None => {
-            println!("Listen up partner - soemthing bad happened.");
-            return
-        }
-    };
-
-    println!("Args: {:?}", pargs);
-
-    return    
-    /*
-    let file = match args.get(1) {
-        Some(arg) => arg,
-        _ => {
-            println!("cat: <file> (no options, no problems)");
-            return
-        }
-    };
-
+fn print_file_contents(file: &String) {
+    
     let file_metadata = match fs::metadata(file) {
         Ok(f)    => f,
         Err(err) => {
@@ -106,6 +85,22 @@ fn main() {
             println!("{}", l);
         }
     }
-    */
+    
+}
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let pargs = match parse_aruments(args) {
+        Some(args) => args,
+        None => {
+            println!("Listen up partner - soemthing bad happened.");
+            return
+        }
+    };
+
+    println!("Args: {:?}", pargs);
+    for file in pargs.files {
+        print_file_contents(&file);
+    }
+    return    
 }
 
