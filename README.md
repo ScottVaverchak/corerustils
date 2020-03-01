@@ -19,7 +19,7 @@ Anything not listed below hasn't been worked on yet.
 
 ### yes 
 
-More or less complete? This was the first program implemented. I will revist it evnetually
+```yes``` is more or less complete. This was the first program implemented. Accept this as my apology for the implementation.
 
 ### cat
 
