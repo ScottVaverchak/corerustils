@@ -29,7 +29,6 @@ struct Arguments {
 
 
 fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
-    let mut all_files = false;
     let mut pargs = Arguments {
        count: false,
        count_non_blank: false,
