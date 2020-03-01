@@ -19,7 +19,7 @@ use std::io::{self, BufRead};
  * is a madman
  */
 
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 struct Arguments {
     count: bool,
     count_non_blank: bool,
@@ -57,7 +57,7 @@ fn parse_aruments(args: Vec::<String>) -> Option<Arguments> {
 }
 
 
-fn print_file_contents(file: &String) {
+fn print_file_contents(file: &String, count: &bool) {
     
     let file_metadata = match fs::metadata(file) {
         Ok(f)    => f,
@@ -81,10 +81,16 @@ fn print_file_contents(file: &String) {
     };
 
     let lines = io::BufReader::new(file_lines).lines();
-
+    
+    let mut current_count = 1;
     for line in lines {
         if let Ok(l) = line {
-            println!("{}", l);
+            if *count {
+                println!("{}\t {}", current_count, l);
+               current_count += 1;   
+            } else {
+                println!("{}", l);
+            }
         }
     }
     
@@ -99,9 +105,8 @@ fn main() {
         }
     };
 
-    println!("Args: {:?}", pargs);
     for file in pargs.files {
-        print_file_contents(&file);
+        print_file_contents(&file, &pargs.count);
     }
     
     return    
