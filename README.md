@@ -37,8 +37,8 @@ Switched I ignored:
 
 | Switch | Description | Will you ever even add it?! | 
 |--------|-------------|-----------------------------|
-| <blank> | This will echo back to you | Maybe - this one seems easy enough |
+| blank | This will echo back to you | Maybe - this one seems easy enough |
 
 Performance of the current implementation is questionable and will be revisted when I'm a hardened rustician with claw scars and the opinion that everything should be implemtned in rust. 
 
-cat works as far as I'm concerned and if complete. An updated tabe of ignored switched will be added
+cat works as far as I'm concerned and if complete. An updated tabe of ignored switches will be added

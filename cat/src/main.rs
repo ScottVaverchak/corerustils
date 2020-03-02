@@ -2,14 +2,6 @@ use std::env;
 use std::fs;
 use std::io::{self, BufRead};
 
-/*
- * going to ignore -v, -u, -t, -e for now
- * 
- * I should have known this, but if you don't append a file
- * anythign you type will get echoed back to you because cat
- * is a madman
- */
-
 #[derive(Debug,Clone)]
 struct Arguments {
     count: bool,
@@ -17,7 +9,6 @@ struct Arguments {
     single_spaced: bool,
     files: Vec<String>
 }
-
 
 fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
     let mut pargs = Arguments {
@@ -45,7 +36,6 @@ fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
 
     Ok(pargs)
 }
-
 
 fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool, single_spaced: &bool) {
     
@@ -99,6 +89,7 @@ fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool, single_
     }
     
 }
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let pargs = match parse_aruments(args) {
