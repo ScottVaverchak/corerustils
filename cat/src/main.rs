@@ -23,7 +23,7 @@ fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
     let mut pargs = Arguments {
        count: false,
        count_non_blank: false,
-       single_spaced: true,
+       single_spaced: false,
        files: vec![]
     };
     
@@ -47,7 +47,7 @@ fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
 }
 
 
-fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool) {
+fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool, single_spaced: &bool) {
     
     let file_metadata = match fs::metadata(file) {
         Ok(f)    => f,
@@ -73,8 +73,19 @@ fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool) {
     let lines = io::BufReader::new(file_lines).lines();
     
     let mut current_count = 1;
+    let mut prev_line_blank = false;
     for line in lines {
         if let Ok(l) = line {
+            if *single_spaced {
+                if prev_line_blank && l.is_empty() {
+                    continue;
+                } else if prev_line_blank && l.is_empty() == false {
+                    prev_line_blank = true;
+                } else {
+                    prev_line_blank = false;
+                }
+            }
+
             if *ignore_blank && l.is_empty() == false {
                println!("{}\t {}", current_count, l);
                current_count += 1;
@@ -100,7 +111,7 @@ fn main() {
     };
 
     for file in pargs.files {
-        print_file_contents(&file, &pargs.count, &pargs.count_non_blank);
+        print_file_contents(&file, &pargs.count, &pargs.count_non_blank, &pargs.single_spaced);
     }
     
     return    
