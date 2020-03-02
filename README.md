@@ -33,4 +33,12 @@ Anything not listed below hasn't been worked on yet.
 
 All other switches will not be implemented initially (or ever).
 
+Switched I ignored:
+
+| Switch | Description | Will you ever even add it?! | 
+|--------|-------------|-----------------------------|
+| <blank> | This will echo back to you | Maybe - this one seems easy enough |
+
 Performance of the current implementation is questionable and will be revisted when I'm a hardened rustician with claw scars and the opinion that everything should be implemtned in rust. 
+
+cat works as far as I'm concerned and if complete. An updated tabe of ignored switched will be added
