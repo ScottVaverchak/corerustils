@@ -45,6 +45,5 @@ Switches I ignored for now:
 
 ```-e, -t, -v``` would all seem to use the same logic, so these maybe completed first. 
 
-Performance of the current implementation is questionable and will be revisted when I'm a hardened rustician with claw scars and the opinion that everything should be implemtned in rust. 
+Performance of the current implementation is questionable and will be revisted when I have a better grasp of rust.
 
-cat works as far as I'm concerned and if complete. An updated tabe of ignored switches will be added
