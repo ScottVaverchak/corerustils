@@ -16,6 +16,7 @@ Anything not listed below hasn't been worked on yet.
 
 * [yes](#yes)
 * [cat](#cat)
+* [head](#head)
 
 ### yes 
 
@@ -23,7 +24,9 @@ Anything not listed below hasn't been worked on yet.
 
 ### cat
 
-```cat``` will print out multiple files and error out when it the given file is a directory or does not exist. The following switches will be implemented:
+```cat``` is a standard Unix utility that reads files sequentially, writing them to standard output. The name is derived from its function to concatenate files.  
+
+The following switches will be implemented:
 
 | Switch       | Description                                                                   | Implemented? |
 |--------------|-------------------------------------------------------------------------------|--------------|
@@ -46,4 +49,17 @@ Switches I ignored for now:
 ```-e, -t, -v``` would all seem to use the same logic, so these maybe completed first. 
 
 Performance of the current implementation is questionable and will be revisted when I have a better grasp of rust.
+
+### head
+
+```head``` is a program on Unix and Unix-like operating systems used to display the beginning of a text file or piped data.
+
+The following switched will be implemented:
+
+| Switch   | Description        | Implemented? |
+|----------|--------------------|--------------|
+| ```-n N``` | Count by N lines | No           |
+| ```-c N``` | Count by N bytes | No           | 
+
+If multiple files are passed in the arguments, ```==> XXX <==``` will be printed as the header, where ```XXX``` is the name of the file.
 
