@@ -20,7 +20,7 @@ fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
     };
     
     for (idx, arg) in args.iter().skip(1).enumerate() {
-        if !arg.starts_with("-") {
+        if !arg.starts_with('-') {
             pargs.files = args[(idx + 1)..].to_vec();
             break;
         }
@@ -38,7 +38,7 @@ fn parse_aruments(args: Vec::<String>) -> Result<Arguments, String> {
     Ok(pargs)
 }
 
-fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool, single_spaced: &bool) {
+fn print_file_contents(file: &str, count: bool, ignore_blank: bool, single_spaced: bool) {
     
     let file_metadata = match fs::metadata(file) {
         Ok(f)    => f,
@@ -67,22 +67,19 @@ fn print_file_contents(file: &String, count: &bool, ignore_blank: &bool, single_
     let mut prev_line_blank = false;
     for line in lines {
         if let Ok(l) = line {
-            if *single_spaced {
+            if single_spaced {
                 if prev_line_blank && l.is_empty() {
                     continue;
-                } else if prev_line_blank && l.is_empty() == false {
+                } else if prev_line_blank && !l.is_empty() {
                     prev_line_blank = true;
                 } else {
                     prev_line_blank = false;
                 }
             }
 
-            if *ignore_blank && l.is_empty() == false {
+            if (ignore_blank && !l.is_empty()) || count {
                println!("{}\t {}", current_count, l);
                current_count += 1;
-            } else if *count {
-               println!("{}\t {}", current_count, l);
-               current_count += 1;   
             } else {
                 println!("{}", l);
             }
@@ -103,7 +100,7 @@ fn main() {
     };
 
     for file in pargs.files {
-        print_file_contents(&file, &pargs.count, &pargs.count_non_blank, &pargs.single_spaced);
+        print_file_contents(&file, pargs.count, pargs.count_non_blank, pargs.single_spaced);
     }
     
     process::exit(0)
