@@ -20,7 +20,9 @@ Anything not listed below hasn't been worked on yet.
 
 ### yes 
 
-```yes``` is more or less complete. This was the first program implemented. Accept this as my apology for the implementation.
+```yes```  is a Unix command, which outputs an affirmative response, or a user-defined string of text continuously until killed. 
+
+```yes``` was the first "program" I wrote in rust - this is my appology for the implementation. 
 
 ### cat
 
