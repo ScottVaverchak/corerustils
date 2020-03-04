@@ -1,6 +1,7 @@
 use std::env;
 use std::fs;
 use std::io::{self, BufRead};
+use std::process;
 
 #[derive(Debug,Clone)]
 struct Arguments {
@@ -97,7 +98,7 @@ fn main() {
         Err(err) => {
             println!("{}", err);
             println!("Usage will go here.com");
-            return
+            process::exit(1)
         }
     };
 
@@ -105,6 +106,6 @@ fn main() {
         print_file_contents(&file, &pargs.count, &pargs.count_non_blank, &pargs.single_spaced);
     }
     
-    return    
+    process::exit(0)
 }
 
