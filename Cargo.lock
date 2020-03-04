@@ -5,6 +5,10 @@ name = "cat"
 version = "0.1.0"
 
 [[package]]
+name = "head"
+version = "0.1.0"
+
+[[package]]
 name = "yes"
 version = "0.1.0"
 
