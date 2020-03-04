@@ -25,19 +25,25 @@ Anything not listed below hasn't been worked on yet.
 
 ```cat``` will print out multiple files and error out when it the given file is a directory or does not exist. The following switches will be implemented:
 
-| Switch | Description                                                                   | Implemented? |
-|--------|-------------------------------------------------------------------------------|--------------|
-| -b     | Number the non-blank output lines, starting at 1.                             | Yes          |
-| -n     | Number the output lines, starting at 1.                                       | Yes          |
-| -s     | Squeeze multiple adjacent empty lines, causing the output to be single spaced | No           |
+| Switch       | Description                                                                   | Implemented? |
+|--------------|-------------------------------------------------------------------------------|--------------|
+| ```-b```     | Number the non-blank output lines, starting at 1.                             | Yes          |
+| ```-n```     | Number the output lines, starting at 1.                                       | Yes          |
+| ```-s```     | Squeeze multiple adjacent empty lines, causing the output to be single spaced | Yes          |
 
 All other switches will not be implemented initially (or ever).
 
-Switched I ignored:
+Switches I ignored for now:
 
-| Switch | Description | Will you ever even add it?! | 
-|--------|-------------|-----------------------------|
-| blank | This will echo back to you | Maybe - this one seems easy enough |
+| Switch   | Description |  
+|----------|-------------|
+| blank    | This will echo back to you |
+| ```-e``` | Display non-printing characters (see the -v option), and display a dollar sign (`$') at the end of each line. |
+| ```-t``` | Display non-printing characters (see the -v option), and display tab characters as `^I'. |
+| ```-u``` | Disable output buffering. |
+| ```-v``` | Display non-printing characters so they are visible.  Control characters print as `^X' for control-X; the delete character (octal 0177) prints as `^?'.  Non-ASCII characters (with the high bit set) are printed as `M-' (for meta) followed by the character for the low 7 bits. |
+
+```-e, -t, -v``` would all seem to use the same logic, so these maybe completed first. 
 
 Performance of the current implementation is questionable and will be revisted when I'm a hardened rustician with claw scars and the opinion that everything should be implemtned in rust. 
 
